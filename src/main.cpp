@@ -5,15 +5,12 @@
 #include <limits>
 
 // === CONFIGURATION ===
-
-#define BUTTON_PIN D8
 #define PIXELS_PIN D2
 #define NPIXELS 40
 #define BRIGHTNESS 5
 #define SSID "YOUR_WIFI_NAME"
 #define WPA_PSK "YOUR_WIFI_KEY"
 #define UPDATE_INTERVAL 60e3
-#define RESYNC_EVERY_MS 3600e3
 #define HUE_MAX UINT_LEAST16_MAX
 
 // Central European Summer Time
@@ -27,7 +24,6 @@ int halfDayInSeconds = 12 * 3600;
 // === GLOBAL STATE ===
 Adafruit_NeoPixel pixels =
     Adafruit_NeoPixel(NPIXELS, PIXELS_PIN, NEO_GRB + NEO_KHZ800);
-bool shouldUpdate = true;
 
 long millis_per_segment = 5 * 1000 / NPIXELS;
 
