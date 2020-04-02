@@ -7,7 +7,6 @@
 // === CONFIGURATION ===
 #define PIXELS_PIN D2
 #define NPIXELS 40
-#define BRIGHTNESS 5
 #define SSID "YOUR_WIFI_NAME"
 #define WPA_PSK "YOUR_WIFI_KEY"
 #define UPDATE_INTERVAL 60e3
@@ -29,8 +28,8 @@ long millis_per_segment = 5 * 1000 / NPIXELS;
 
 ///////////////////////
 
-inline void setLed(size_t ledIdx, uint16_t hue) {
-  pixels.setPixelColor(ledIdx, pixels.ColorHSV(hue, 255, BRIGHTNESS));
+inline void setLed(size_t ledIdx, uint16_t hue, uint8_t brightness) {
+  pixels.setPixelColor(ledIdx, pixels.ColorHSV(hue, 255, brightness));
 }
 
 void updateProgress(time_t const &t) {
@@ -49,10 +48,10 @@ void updateProgress(time_t const &t) {
   for (uint16_t ledIdx = 0; ledIdx <= progressInCircleIdx; ++ledIdx) {
     if (isDay) {
       // During the day cycle, all colors of the rainbow
-      setLed(ledIdx, ledIdx * (HUE_MAX / 40));
+      setLed(ledIdx, ledIdx * (HUE_MAX / 40), 5);
     } else {
       // During the night cycle, yellow
-      setLed(ledIdx, 7000);
+      setLed(ledIdx, 7000, 2);
     }
   }
   pixels.show();
