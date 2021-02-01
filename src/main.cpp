@@ -45,15 +45,20 @@ void updateProgress(time_t const &t) {
   Serial.printf("Now %.2d:%.2d:%.2d => isDay=%d progress=%d\n", hour(t),
                 minute(t), second(t), isDay, progressInCircleIdx);
 
-  for (uint16_t ledIdx = 0; ledIdx <= progressInCircleIdx; ++ledIdx) {
-    if (isDay) {
-      // During the day cycle, all colors of the rainbow
-      setLed(ledIdx, ledIdx * (HUE_MAX / 40), 5);
-    } else {
-      // During the night cycle, yellow
-      setLed(ledIdx, 7000, 2);
+  if (isDay) {
+    // During the day cycle, all colors of the rainbow
+    for (uint16_t ledIdx = 0; ledIdx <= progressInCircleIdx; ++ledIdx) {
+      setLed(ledIdx, ledIdx * (HUE_MAX / NPIXELS), 5);
     }
+  } else {
+    // During the night: color 4 pixels yellow and a green dot where we are
+    setLed(0, 7000, 2);
+    setLed(1 * NPIXELS / 4, 7000, 2);
+    setLed(2 * NPIXELS / 4, 7000, 2);
+    setLed(3 * NPIXELS / 4, 7000, 2);
+    setLed(progressInCircleIdx, 21500, 2);
   }
+
   pixels.show();
 }
 
