@@ -61,3 +61,9 @@ Result
 ![final result](doc/final.jpg)
 
 If you also made this, or something similair, please consider opening an issue on github to let me know!
+
+
+See also
+--------
+
+- Same kind of hardware, but way more leds to make it a full led driver clock: https://hackaday.com/2021/02/27/circle-full-of-leds-becomes-a-clock/
